@@ -3,5 +3,4 @@
 python network_diagram.py
 pdflatex network_diagram.tex
 
-rm *.aux *.log *.vscodeLog
-rm *.tex
+rm *.aux *.log

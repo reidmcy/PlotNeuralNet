@@ -1,3 +1,6 @@
+Running `tikzmake.sh` should generate the pdf `network_diagram.pdf` you can then edit `network_diagram.py` to change the output. The orignial repo [github.com/HarisIqbal88/PlotNeuralNet](https://github.com/HarisIqbal88/PlotNeuralNet) has a little bit more info
+
+
 # PlotNeuralNet
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2526396.svg)](https://doi.org/10.5281/zenodo.2526396)
 
