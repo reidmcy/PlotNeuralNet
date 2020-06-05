@@ -130,7 +130,7 @@ def to_BacthNorm(name, offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth
 def to_Relu(name, offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth=32, opacity=0.5, caption=" "):
     return r"""
 \pic[shift={ """+ offset +""" }] at """+ to +""" 
-    {Box={
+    {LargeBox={
         name="""+name+""",
         caption="""+ caption +r""",
         fill=\ConvReluColor,

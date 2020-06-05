@@ -72,9 +72,23 @@ def block_Res( num, name, botton, top, s_filer=256, n_filer=64, offset="(0,0,0)"
 
 def invisible_box(name, botton, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):
     return [
-        to_Relu( name=name, offset=offset, to="({}-east)".format(botton), width=width, height=height, depth=depth, opacity=opacity),
+        to_Relu( name=name, offset=offset, to="({}-east)".format(botton), width=width, height=height, depth=depth, opacity=opacity, caption=caption),
         draw_half_down_broken( of=botton, to=name),
         draw_cross("({}-east)".format(name))
+    ]
+
+
+def invisible_box_2(name, botton, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):
+    return [
+        to_Relu( name=name, offset=offset, to="({}-east)".format(botton), width=width, height=height, depth=depth, opacity=opacity, caption=caption),
+        to_connection( of=botton, to=name)
+    ]
+
+
+def invisible_box_3(name, botton, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):
+    return [
+        to_Relu( name=name, offset=offset, to="({}-east)".format(botton), width=width, height=height, depth=depth, opacity=opacity, caption=caption),
+        draw_half_up( of=botton, to=name)
     ]
 
 def to_dashed (of, to):
@@ -120,25 +134,40 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
                              height=height,
                              depth=depth
                             )
-    connection_1 = draw_half_up( of=botton, to=policy_conv_1_name)
+    # connection_1 = draw_half_up( of=botton, to=policy_conv_1_name)
+    connection_1 = to_connection( of=botton, to=policy_conv_1_name)
     botton = policy_conv_1_name
+
+
+    invisible_1_name = name + "_invisible_1"
+    invisible_1 = invisible_box_2( name=invisible_1_name, botton=botton, offset="(1.5,0,0)", width=1, height=13, depth=13, opacity=0, caption='\makebox[12pt]{\shortstack[c]{Gradient Stop \\\ Location 2}}')
+    botton = invisible_1_name
+
 
     policy_conv_2_name = name + '_conv_2'
     policy_conv_2 = to_Conv(name=policy_conv_2_name, 
                        s_filer=s_filer, 
                        n_filer=80, 
-                       offset="(2.4,0,0)", 
+                       offset="(2,0,0)", 
                        to="({}-east)".format(botton), 
                        width=width * 2, 
                        height=height, 
                        depth=depth,
                        caption='\makebox[0pt]{\shortstack[c]{Conv2d}}'
                        )
+
+
     connection_2 = to_connection( 
         "{}".format(botton), 
         "{}".format(policy_conv_2_name), 
     )
+
     botton = policy_conv_2_name
+
+    invisible_2_name = name + "_invisible_2"
+    invisible_2 = invisible_box_2( name=invisible_2_name, botton=botton, offset="(1.5,0,0)", width=1, height=13, depth=13, opacity=0, caption='\makebox[12pt]{\shortstack[c]{Gradient Stop \\\ Location 1}}')
+    botton = invisible_2_name
+
 
     # # reshape and policy map
     # policy_reshape_name = name + '_reshape'
@@ -163,7 +192,7 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     policy_map = to_FC_softmax(name=policy_map_name, 
                        s_filer=1, 
                        n_filer=1858, 
-                       offset="(2.3,0,0)", 
+                       offset="(2,0,0)", 
                        to="({}-east)".format(botton), 
                        width=width * 7, 
                        height=width * 1.5 * 1.5, 
@@ -172,15 +201,17 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
                        ) 
 
     connection_3 = draw_dashed( 
+        "{}".format(policy_conv_2_name), 
+        "{}".format(policy_map_name), 
+    )
+
+    connection_4 = to_connection( 
         "{}".format(botton), 
         "{}".format(policy_map_name), 
     )
 
-    # connection_4 = to_connection( 
-    #     "{}".format(botton), 
-    #     "{}".format(policy_map_name), 
-    # )
     botton = policy_map_name
+
 
 
     # final output
@@ -207,7 +238,7 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     # output_img_name = "output_img"
     # output_img = to_output('chess.png', off='3', to="({}-east)".format(botton), width=8, height=8, name=output_img_name)
 
-    return [*policy_conv_1, connection_1, policy_conv_2, *connection_2, policy_map, connection_3, policy_output, connection_5]
+    return [*policy_conv_1, connection_1, *invisible_1, policy_conv_2, connection_2, *invisible_2, policy_map, connection_3, connection_4, policy_output, connection_5]
     
 
 def value_head(name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):
@@ -249,7 +280,7 @@ def value_head(name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=2,
     value_dense1 = to_FC(name=value_dense1_name, 
                        s_filer=1, 
                        n_filer=128, 
-                       offset="(2.5,0,0)", 
+                       offset="(3.4,0,0)", 
                        to="({}-east)".format(botton), 
                        width=width * 5.5, 
                        height=width * 1.5 * 2, 
@@ -273,7 +304,7 @@ def value_head(name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=2,
     value_dense2 = to_FC_softmax(name=value_dense2_name, 
                        s_filer=1, 
                        n_filer=3, 
-                       offset="(2.5,0,0)", 
+                       offset="(3.4,0,0)", 
                        to="({}-east)".format(botton), 
                        width=width * 4.5, 
                        height=width * 1.5 * 2, 
@@ -292,7 +323,7 @@ def value_head(name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=2,
     value_output = to_FC(name=value_output_name, 
                        s_filer=1, 
                        n_filer=1, 
-                       offset="(2.5,0,0)", 
+                       offset="(3.4,0,0)", 
                        to="({}-east)".format(botton), 
                        width=width * 1.5 * 2, 
                        height=width * 1.5 * 2, 
@@ -333,7 +364,7 @@ def block_Res_2( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     res_conv_block2 = conv_batchnorm(name=conv2_name, 
                                        s_filer=s_filer, 
                                        n_filer=n_filer, 
-                                       offset="(1,0,0)", 
+                                       offset="(1.1,0,0)", 
                                        to="({}-east)".format(botton), 
                                        width=width, 
                                        height=height, 
@@ -350,12 +381,12 @@ def block_Res_2( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     se_block = to_SE(name=se_name, 
                      s_filer=s_filer, 
                      n_filer=n_filer, 
-                     offset="(1,0,0)", 
+                     offset="(1.1,0,0)", 
                      to="({}-east)".format(botton), 
                      width=width, 
                      height=height, 
                      depth=depth,
-                     caption='\makebox[0pt]{\shortstack[c]{SE}}'
+                     caption='\makebox[0pt]{\shortstack[c]{ \\\ \\\ \\\ SE Block}}'
                      )
 
     connection_3 = to_connection( 
@@ -370,7 +401,7 @@ def block_Res_2( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     conv_skip_add = to_Conv(name=skip_name, 
                        s_filer=s_filer, 
                        n_filer=n_filer, 
-                       offset="(1,0,0)", 
+                       offset="(1.1,0,0)", 
                        to="({}-east)".format(botton), 
                        width=width, 
                        height=height, 
