@@ -150,7 +150,7 @@ def to_SE( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=
         caption="""+ caption +""",
         xlabel={{"""+ str(n_filer) +""", }},
         ylabel="""+ str(s_filer) +""",
-        fill=\PoolColor,
+        fill=\OpoolColor,
         height="""+ str(height) +""",
         width="""+ str(width) +""",
         depth="""+ str(depth) +"""
