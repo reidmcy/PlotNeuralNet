@@ -66,21 +66,7 @@
         }
     };
 
-\pic[shift={ (1.5,0,0) }] at (conv_block1_relu-east) 
-    {LargeBox={
-        name=invisible_1,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 9}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-\draw [connection]  (conv_block1_relu-east)    -- node {\midarrow} (invisible_1-west);
-
-\pic[shift={(2,0,0)}] at (invisible_1-east) 
+\pic[shift={(2,0,0)}] at (conv_block1_relu-east) 
     {Box={
         name=res_0_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -116,7 +102,7 @@
         }
     };
 
-\draw [connection]  (invisible_1-east)    -- node {\midarrow} (res_0_conv_1-west);
+\draw [connection]  (conv_block1_relu-east)    -- node {\midarrow} (res_0_conv_1-west);
 
 \pic[shift={(1.1,0,0)}] at (res_0_conv_1-east) 
     {Box={
@@ -204,21 +190,7 @@
 -- node {\copymidarrow}(res_0_skip-top)
 -- node {\copymidarrow} (res_0_skip-north);
 
-\pic[shift={ (1.5,0,0) }] at (res_0_add_relu-east) 
-    {LargeBox={
-        name=invisible_2,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 8}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-\draw [connection]  (res_0_add_relu-east)    -- node {\midarrow} (invisible_2-west);
-
-\pic[shift={(2,0,0)}] at (invisible_2-east) 
+\pic[shift={(2,0,0)}] at (res_0_add_relu-east) 
     {Box={
         name=res_1_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -254,7 +226,7 @@
         }
     };
 
-\draw [connection]  (invisible_2-east)    -- node {\midarrow} (res_1_conv_1-west);
+\draw [connection]  (res_0_add_relu-east)    -- node {\midarrow} (res_1_conv_1-west);
 
 \pic[shift={(1.1,0,0)}] at (res_1_conv_1-east) 
     {Box={
@@ -342,21 +314,7 @@
 -- node {\copymidarrow}(res_1_skip-top)
 -- node {\copymidarrow} (res_1_skip-north);
 
-\pic[shift={ (1.5,0,0) }] at (res_1_add_relu-east) 
-    {LargeBox={
-        name=invisible_3,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 7}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-\draw [connection]  (res_1_add_relu-east)    -- node {\midarrow} (invisible_3-west);
-
-\pic[shift={(2,0,0)}] at (invisible_3-east) 
+\pic[shift={(2,0,0)}] at (res_1_add_relu-east) 
     {Box={
         name=res_2_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -392,7 +350,7 @@
         }
     };
 
-\draw [connection]  (invisible_3-east)    -- node {\midarrow} (res_2_conv_1-west);
+\draw [connection]  (res_1_add_relu-east)    -- node {\midarrow} (res_2_conv_1-west);
 
 \pic[shift={(1.1,0,0)}] at (res_2_conv_1-east) 
     {Box={
@@ -480,21 +438,7 @@
 -- node {\copymidarrow}(res_2_skip-top)
 -- node {\copymidarrow} (res_2_skip-north);
 
-\pic[shift={ (1.5,0,0) }] at (res_2_add_relu-east) 
-    {LargeBox={
-        name=invisible_4,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 6}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-\draw [connection]  (res_2_add_relu-east)    -- node {\midarrow} (invisible_4-west);
-
-\pic[shift={(2,0,0)}] at (invisible_4-east) 
+\pic[shift={(2,0,0)}] at (res_2_add_relu-east) 
     {Box={
         name=res_3_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -530,7 +474,7 @@
         }
     };
 
-\draw [connection]  (invisible_4-east)    -- node {\midarrow} (res_3_conv_1-west);
+\draw [connection]  (res_2_add_relu-east)    -- node {\midarrow} (res_3_conv_1-west);
 
 \pic[shift={(1.1,0,0)}] at (res_3_conv_1-east) 
     {Box={
@@ -618,21 +562,7 @@
 -- node {\copymidarrow}(res_3_skip-top)
 -- node {\copymidarrow} (res_3_skip-north);
 
-\pic[shift={ (1.5,0,0) }] at (res_3_add_relu-east) 
-    {LargeBox={
-        name=invisible_5,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 5}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-\draw [connection]  (res_3_add_relu-east)    -- node {\midarrow} (invisible_5-west);
-
-\pic[shift={(2,0,0)}] at (invisible_5-east) 
+\pic[shift={(2,0,0)}] at (res_3_add_relu-east) 
     {Box={
         name=res_4_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -668,7 +598,7 @@
         }
     };
 
-\draw [connection]  (invisible_5-east)    -- node {\midarrow} (res_4_conv_1-west);
+\draw [connection]  (res_3_add_relu-east)    -- node {\midarrow} (res_4_conv_1-west);
 
 \pic[shift={(1.1,0,0)}] at (res_4_conv_1-east) 
     {Box={
@@ -756,21 +686,7 @@
 -- node {\copymidarrow}(res_4_skip-top)
 -- node {\copymidarrow} (res_4_skip-north);
 
-\pic[shift={ (1.5,0,0) }] at (res_4_add_relu-east) 
-    {LargeBox={
-        name=invisible_6,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 4}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-\draw [connection]  (res_4_add_relu-east)    -- node {\midarrow} (invisible_6-west);
-
-\pic[shift={(2,0,0)}] at (invisible_6-east) 
+\pic[shift={(2,0,0)}] at (res_4_add_relu-east) 
     {Box={
         name=res_5_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -806,7 +722,7 @@
         }
     };
 
-\draw [connection]  (invisible_6-east)    -- node {\midarrow} (res_5_conv_1-west);
+\draw [connection]  (res_4_add_relu-east)    -- node {\midarrow} (res_5_conv_1-west);
 
 \pic[shift={(1.1,0,0)}] at (res_5_conv_1-east) 
     {Box={
@@ -894,21 +810,7 @@
 -- node {\copymidarrow}(res_5_skip-top)
 -- node {\copymidarrow} (res_5_skip-north);
 
-\pic[shift={ (1.5,4.5,0) }] at (res_5_add_relu-east) 
-    {LargeBox={
-        name=invisible_7,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 3}},
-        fill=\ConvReluColor,
-        opacity=0,
-        height=13,
-        width=1,
-        depth=13
-        }
-    };
-
-    \draw [connection] (res_5_add_relu-north) -- node {\midarrow} (res_5_add_relu-north|-invisible_7-west) -- node {\midarrow} (invisible_7-west) ;
-
-\pic[shift={(2.3,0,0)}] at (invisible_7-east) 
+\pic[shift={(4.5,4.5,0)}] at (res_5_add_relu-east) 
     {Box={
         name=policy_head_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -944,12 +846,12 @@
         }
     };
 
-\draw [connection]  (invisible_7-east)    -- node {\midarrow} (policy_head_conv_1-west);
+\draw [connection]  (res_5_add_relu-east)    -- node {\midarrow} (policy_head_conv_1-west);
 
 \pic[shift={ (1.5,0,0) }] at (policy_head_conv_1-east) 
     {LargeBox={
         name=policy_head_invisible_1,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 2}},
+        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location}},
         fill=\ConvReluColor,
         opacity=0,
         height=13,
@@ -959,6 +861,18 @@
     };
 
 \draw [connection]  (policy_head_conv_1-east)    -- node {\midarrow} (policy_head_invisible_1-west);
+
+\pic[shift={ (-0.5,-3.1,0) }] at (policy_head_invisible_1-east) 
+    {HugeBox={
+        name=policy_head_invisible_1_cap,
+        caption=\makebox[0pt]{\shortstack[c]{2}},
+        fill=\ConvReluColor,
+        opacity=0,
+        height=0,
+        width=0,
+        depth=0
+        }
+    };
 
 \pic[shift={(2,0,0)}] at (policy_head_invisible_1-east) 
     {Box={
@@ -978,7 +892,7 @@
 \pic[shift={ (1.5,0,0) }] at (policy_head_conv_2-east) 
     {LargeBox={
         name=policy_head_invisible_2,
-        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location 1}},
+        caption=\makebox[12pt]{\shortstack[c]{Gradient Stop \\ Location}},
         fill=\ConvReluColor,
         opacity=0,
         height=13,
@@ -988,6 +902,18 @@
     };
 
 \draw [connection]  (policy_head_conv_2-east)    -- node {\midarrow} (policy_head_invisible_2-west);
+
+\pic[shift={ (-0.5,-3.1,0) }] at (policy_head_invisible_2-east) 
+    {HugeBox={
+        name=policy_head_invisible_2_cap,
+        caption=\makebox[0pt]{\shortstack[c]{1}},
+        fill=\ConvReluColor,
+        opacity=0,
+        height=0,
+        width=0,
+        depth=0
+        }
+    };
 
 \pic[shift={ (2,0,0) }] at (policy_head_invisible_2-east) 
     {RightBandedBox={
@@ -1029,23 +955,7 @@
 
 \draw [densely dashed]  (policy_head_policy_map-east)    -- node {\midarrow} (policy_head_output-west);
 
-\pic[shift={ (1.8,-4.5,0) }] at (res_5_add_relu-east) 
-    {LargeBox={
-        name=invisible,
-        caption=,
-        fill=\ConvReluColor,
-        opacity=0,
-        height=0,
-        width=0,
-        depth=0
-        }
-    };
-
-    \draw [brokenconnection] (res_5_add_relu-south) -- node {\brokenmidarrow} (res_5_add_relu-south|-invisible-west) -- node {\brokenmidarrow}  (invisible-west) ;
-
-\draw (invisible-east) node[cross] {};
-
-\pic[shift={(2.2,0,0)}] at (invisible-east) 
+\pic[shift={(2.2,0,0)}] at (res_5_add_relu-east) 
     {Box={
         name=value_head_conv_1,
         caption=\makebox[0pt]{\shortstack[c]{Conv2d\\BN\\Relu}},
@@ -1081,7 +991,7 @@
         }
     };
 
-\draw [brokenconnection]  (invisible-east)    -- node {\brokenmidarrow} (value_head_conv_1-west);
+\draw [brokenconnection]  (res_5_add_relu-east)    -- node {\brokenmidarrow} (value_head_conv_1-west);
 
 \pic[shift={ (3.4,0,0) }] at (value_head_conv_1-east) 
     {Box={

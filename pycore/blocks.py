@@ -84,6 +84,10 @@ def invisible_box_2(name, botton, offset="(0,0,0)", width=2, height=40, depth=40
         to_connection( of=botton, to=name)
     ]
 
+def invisible_box_2_no_connection(name, botton, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):
+    return [
+        to_HugeBox( name=name, offset=offset, to="({}-east)".format(botton), width=width, height=height, depth=depth, opacity=opacity, caption=caption),
+    ]
 
 def invisible_box_3(name, botton, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):
     return [
@@ -140,7 +144,8 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
 
 
     invisible_1_name = name + "_invisible_1"
-    invisible_1 = invisible_box_2( name=invisible_1_name, botton=botton, offset="(1.5,0,0)", width=1, height=13, depth=13, opacity=0, caption='\makebox[12pt]{\shortstack[c]{Gradient Stop \\\ Location 2}}')
+    invisible_1 = invisible_box_2( name=invisible_1_name, botton=botton, offset="(1.5,0,0)", width=1, height=13, depth=13, opacity=0, caption='\makebox[12pt]{\shortstack[c]{Gradient Stop \\\ Location}}')
+    invisible_1_cap = invisible_box_2_no_connection( name=(name + "_invisible_1_cap"), botton=invisible_1_name, offset="(-0.5,-3.1,0)", width=0, height=0, depth=0, opacity=0, caption='\makebox[0pt]{\shortstack[c]{2}}')   
     botton = invisible_1_name
 
 
@@ -165,7 +170,9 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     botton = policy_conv_2_name
 
     invisible_2_name = name + "_invisible_2"
-    invisible_2 = invisible_box_2( name=invisible_2_name, botton=botton, offset="(1.5,0,0)", width=1, height=13, depth=13, opacity=0, caption='\makebox[12pt]{\shortstack[c]{Gradient Stop \\\ Location 1}}')
+    invisible_2 = invisible_box_2( name=invisible_2_name, botton=botton, offset="(1.5,0,0)", width=1, height=13, depth=13, opacity=0, caption='\makebox[12pt]{\shortstack[c]{Gradient Stop \\\ Location}}')
+    invisible_2_cap = invisible_box_2_no_connection( name=(name + "_invisible_2_cap"), botton=invisible_2_name, offset="(-0.5,-3.1,0)", width=0, height=0, depth=0, opacity=0, caption='\makebox[0pt]{\shortstack[c]{1}}')
+    
     botton = invisible_2_name
 
 
@@ -238,7 +245,7 @@ def policy_head( name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=
     # output_img_name = "output_img"
     # output_img = to_output('chess.png', off='3', to="({}-east)".format(botton), width=8, height=8, name=output_img_name)
 
-    return [*policy_conv_1, connection_1, *invisible_1, policy_conv_2, connection_2, *invisible_2, policy_map, connection_3, connection_4, policy_output, connection_5]
+    return [*policy_conv_1, connection_1, *invisible_1, *invisible_1_cap, policy_conv_2, connection_2, *invisible_2, *invisible_2_cap, policy_map, connection_3, connection_4, policy_output, connection_5]
     
 
 def value_head(name, botton, s_filer=256, n_filer=64, offset="(0,0,0)", width=2, height=40, depth=40, opacity=0.5, caption=""):

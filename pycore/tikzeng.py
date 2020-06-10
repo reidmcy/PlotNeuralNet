@@ -142,6 +142,21 @@ def to_Relu(name, offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth=32, 
     };
 """
 
+def to_HugeBox(name, offset="(0,0,0)", to="(0,0,0)", width=1, height=32, depth=32, opacity=0.5, caption=" "):
+    return r"""
+\pic[shift={ """+ offset +""" }] at """+ to +""" 
+    {HugeBox={
+        name="""+name+""",
+        caption="""+ caption +r""",
+        fill=\ConvReluColor,
+        opacity="""+ str(opacity) +""",
+        height="""+ str(height) +""",
+        width="""+ str(width) +""",
+        depth="""+ str(depth) +"""
+        }
+    };
+"""
+
 def to_SE( name, s_filer=256, n_filer=64, offset="(0,0,0)", to="(0,0,0)", width=2, height=40, depth=40, caption=" " ):
 	return r"""
 \pic[shift={ """+ offset +""" }] at """+ to +""" 
